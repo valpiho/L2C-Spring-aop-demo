@@ -18,7 +18,7 @@ public class MyDemoLoggingAspect {
     @Pointcut("execution(* com.pibox.aopdemo.dao.*.set*(..))")
     public void setter() {}
 
-    @Pointcut("forDaoPackage() && (!getter() || setter())")
+    @Pointcut("forDaoPackage() && !(getter() || setter())")
     public void forDaoPackageNoGetterSetter() {}
 
     @Before("forDaoPackage()")
