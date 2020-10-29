@@ -1,5 +1,6 @@
 package com.pibox.aopdemo;
 
+import com.pibox.aopdemo.config.DemoConfig;
 import com.pibox.aopdemo.dao.AccountDAO;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 

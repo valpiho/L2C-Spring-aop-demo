@@ -1,10 +1,11 @@
 package com.pibox.aopdemo;
 
+import com.pibox.aopdemo.config.DemoConfig;
 import com.pibox.aopdemo.dao.AccountDAO;
 import com.pibox.aopdemo.dao.MembershipDAO;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-public class MainDemoApp {
+public class BeforeDemoApp {
 
     public static void main(String[] args) {
 

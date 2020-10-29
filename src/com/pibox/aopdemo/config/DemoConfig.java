@@ -1,4 +1,4 @@
-package com.pibox.aopdemo;
+package com.pibox.aopdemo.config;
 
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
