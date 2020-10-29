@@ -1,10 +1,8 @@
 package com.pibox.aopdemo;
 
 import com.pibox.aopdemo.config.DemoConfig;
-import com.pibox.aopdemo.dao.AccountDAO;
+import com.pibox.aopdemo.service.TrafficFortuneService;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-
-import java.util.List;
 
 public class AroundDemoApp {
 
@@ -13,21 +11,12 @@ public class AroundDemoApp {
         AnnotationConfigApplicationContext context =
                 new AnnotationConfigApplicationContext(DemoConfig.class);
 
-        AccountDAO theAccountDAO = context.getBean("accountDAO", AccountDAO.class);
+        TrafficFortuneService trafficFortuneService =
+                context.getBean("trafficFortuneService", TrafficFortuneService.class);
 
-        try {
-            // boolean flag to simulate exception
-            boolean tripWare = false;
-            List<Account> accountList = theAccountDAO.findAccounts(tripWare);
+        String data = trafficFortuneService.getFortune();
 
-            System.out.println("\nMain program:");
-            System.out.println(accountList);
-        } catch (Exception e) {
-            System.out.println("\nMain program exception: " + e);
-        }
-
-
-
+        System.out.println("My fortune is: " + data);
 
         context.close();
     }
