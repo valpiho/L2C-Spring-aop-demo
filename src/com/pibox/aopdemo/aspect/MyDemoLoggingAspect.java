@@ -2,10 +2,7 @@ package com.pibox.aopdemo.aspect;
 
 import com.pibox.aopdemo.Account;
 import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.annotation.AfterReturning;
-import org.aspectj.lang.annotation.AfterThrowing;
-import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
+import org.aspectj.lang.annotation.*;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
@@ -39,7 +36,7 @@ public class MyDemoLoggingAspect {
     }
 
     @AfterReturning(
-            pointcut = "execution(* com.pibox.aopdemo..dao.AccountDAO.findAccounts(..))",
+            pointcut = "execution(* com.pibox.aopdemo.dao.AccountDAO.findAccounts(..))",
             returning = "result")
     public void afterReturningFindAccountsAdvice(JoinPoint joinPoint, List<Account> result) {
         String method = joinPoint.getSignature().toShortString();
@@ -58,11 +55,17 @@ public class MyDemoLoggingAspect {
     }
 
     @AfterThrowing(
-            pointcut = "execution(* com.pibox.aopdemo..dao.AccountDAO.findAccounts(..))",
+            pointcut = "execution(* com.pibox.aopdemo.dao.AccountDAO.findAccounts(..))",
             throwing = "exp")
     public void afterThrowingFindAccountsAdvice(JoinPoint joinPoint, Throwable exp){
         String method = joinPoint.getSignature().toShortString();
         System.out.println("\n======>>> Executing @AfterThrowing on method: " + method);
         System.out.println("======>>> Exception is: " + exp);
+    }
+
+    @After("execution(* com.pibox.aopdemo.dao.AccountDAO.findAccounts(..))")
+    public void afterFinallyFindAccountsAdvice(JoinPoint joinPoint) {
+        String method = joinPoint.getSignature().toShortString();
+        System.out.println("\n======>>> Executing @After (finally) on method: " + method);
     }
 }
