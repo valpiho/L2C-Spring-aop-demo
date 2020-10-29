@@ -18,7 +18,11 @@ public class AccountDAO {
         return false;
     }
 
-    public List<Account> findAccounts() {
+    public List<Account> findAccounts(boolean tripWare) {
+
+        if (tripWare) {
+            throw new RuntimeException("No soup for you!!!");
+        }
 
         List<Account> accountList = new ArrayList<>();
 

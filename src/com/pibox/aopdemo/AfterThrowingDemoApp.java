@@ -3,9 +3,10 @@ package com.pibox.aopdemo;
 import com.pibox.aopdemo.dao.AccountDAO;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class AfterReturningDemoApp {
+public class AfterThrowingDemoApp {
 
     public static void main(String[] args) {
 
@@ -14,10 +15,19 @@ public class AfterReturningDemoApp {
 
         AccountDAO theAccountDAO = context.getBean("accountDAO", AccountDAO.class);
 
-        List<Account> accountList = theAccountDAO.findAccounts(false);
+        try {
+            // boolean flag to simulate exception
+            boolean tripWare = true;
+            List<Account> accountList = theAccountDAO.findAccounts(tripWare);
 
-        System.out.println("\nMain program:");
-        System.out.println(accountList);
+            System.out.println("\nMain program:");
+            System.out.println(accountList);
+        } catch (Exception e) {
+            System.out.println("\nMain program exception: " + e);
+        }
+
+
+
 
         context.close();
     }

@@ -3,6 +3,7 @@ package com.pibox.aopdemo.aspect;
 import com.pibox.aopdemo.Account;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
+import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.reflect.MethodSignature;
@@ -54,5 +55,14 @@ public class MyDemoLoggingAspect {
             String theUpperName = tempAccount.getName().toUpperCase();
             tempAccount.setName(theUpperName);
         }
+    }
+
+    @AfterThrowing(
+            pointcut = "execution(* com.pibox.aopdemo..dao.AccountDAO.findAccounts(..))",
+            throwing = "exp")
+    public void afterThrowingFindAccountsAdvice(JoinPoint joinPoint, Throwable exp){
+        String method = joinPoint.getSignature().toShortString();
+        System.out.println("\n======>>> Executing @AfterThrowing on method: " + method);
+        System.out.println("======>>> Exception is: " + exp);
     }
 }
